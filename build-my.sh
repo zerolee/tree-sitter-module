@@ -26,22 +26,30 @@ languages=(
 languages_other=(
     'commonlisp'
     'cuda'
+    'cmake'
+    'dockerfile'
     'elisp'
+    'elixir'
+    'go-mod'
+    'heex'
     'lua'
     'make'
     'markdown'
     'objc'
     'perl'
     'r'
+    'sexp'
     'sql'
     'toml'
     'tsx'
     'typescript'
     'vue'
+    'yaml'
 )
 declare -A languages_other_url
 languages_other_url["toml"]="https://github.com/ikatyang/tree-sitter-toml"
 languages_other_url["sql"]="https://github.com/m-novikov/tree-sitter-sql"
+languages_other_url["sexp"]="https://github.com/AbstractMachinesLab/tree-sitter-sexp"
 languages_other_url["perl"]="https://github.com/ganezdragon/tree-sitter-perl"
 languages_other_url["objc"]="https://github.com/merico-dev/tree-sitter-objc"
 languages_other_url["commonlisp"]="https://github.com/theHamsta/tree-sitter-commonlisp"
@@ -54,6 +62,12 @@ languages_other_url["typescript"]="https://github.com/tree-sitter/tree-sitter-ty
 languages_other_url["tsx"]="https://github.com/tree-sitter/tree-sitter-typescript"
 languages_other_url["cuda"]="https://github.com/theHamsta/tree-sitter-cuda"
 languages_other_url["make"]="https://github.com/alemuller/tree-sitter-make"
+languages_other_url["cmake"]="https://github.com/uyha/tree-sitter-cmake"
+languages_other_url["yaml"]="https://github.com/ikatyang/tree-sitter-yaml"
+languages_other_url["heex"]="https://github.com/phoenixframework/tree-sitter-heex"
+languages_other_url["elixir"]="https://github.com/elixir-lang/tree-sitter-elixir"
+languages_other_url["dockerfile"]="https://github.com/camdencheek/tree-sitter-dockerfile"
+languages_other_url["go-mod"]="https://github.com/camdencheek/tree-sitter-go-mod"
 
 if [ $(uname) == "Darwin" ]
 then

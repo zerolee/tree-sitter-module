@@ -1,0 +1,39 @@
+# -*- vesie-mode: 1; cursor-type: box; -*-
+* 说明
+** 用途
+   这个脚本是用来构建 tree-sitter 的 module 的
+** 来源
+   casouri（Yuan Fu）为 Emacs 编写了内置的 tree-sitter 支持(treesit)，与之配套的便是 tree-sitter-module 这个脚本，但原本的脚本支持的语言有限（只支持 7 个语言，现在应该远远不止了），所以就有了我这个脚本(此脚本在原作者的脚本之上构建而成)。
+* 使用方法
+** 下载
+   1. 将这个脚本完整的下载下来
+   2. 为 build-my.sh 加上执行权限:chmod +x build-my.sh
+
+
+ 
+
+
+** build-my.sh 脚本的使用
+   大致语法如下：
+   1. 查看帮助
+      ./build-my.sh help 来查看该脚本的使用方法以及支持的语言
+      
+   2. 构建所有支持的语言
+      ./build-my.sh 它会默认构建所有它支持的语言。
+      
+   3. 只构建一种支持的语言
+      ./build-my.sh language 对支持的语言进行构建
+      
+      比如 ./build-my.sh c，那么他将会构建对 C 的支持
+      
+   4. 同时构建多种支持的语言
+      ./build-my.sh language1 language2 language3... 对 language1 language2 language3...进行构建
+       例子： ./build-my.sh bash c cpp 会对 bash c cpp 进行构建
+       注意：./build-my.sh 后面跟的语言必须是本脚本支持，可以通过 ./build-my.sh help 来查看该脚本支持的语言
+
+   5. 构建本脚本不支持，但符合一定规范的语言
+      ./build-my.sh language url 对不支持的语言，通过添加 url 来进行构建。
+      
+      例子：./bash-my.sh make https://github.com/alemuller/tree-sitter-make
+      PS: 我这个脚本是有 make 的支持的，以上只是例子……
+

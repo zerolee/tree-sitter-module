@@ -10,3 +10,4 @@ README
 !.github/**
 !.gitignore
 !build-my.sh
+!README.org

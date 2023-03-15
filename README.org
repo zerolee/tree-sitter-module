@@ -1,43 +1,137 @@
 # -*- vesie-mode: 1; cursor-type: box; -*-
 * 说明
 ** 用途
-   这个脚本是用来构建 tree-sitter 的 module 的
+   这个脚本是用来构建 ~tree-sitter~ 的 ~module~ 的，嗯，简单的说就是 /github/ 搞了一个增量语法解析的库： *tree-sitter* 。
+
+   使用这个库来为相应的编程语言添加支持，粘合这个库与相应编程语言的东西就是这个 *module* 了……
+
+   这个脚本则是用来自动构建相应 *module* 的……
+
 ** 来源
-   casouri（Yuan Fu）为 Emacs 编写了内置的 tree-sitter 支持(treesit)，与之配套的便是 tree-sitter-module 这个脚本，但原本的脚本支持的语言有限（只支持 7 个语言，现在应该远远不止了），所以就有了我这个脚本(此脚本在原作者的脚本之上构建而成)。
-* 使用方法
+   [[https://github.com/casouri][casouri（Yuan Fu）]]为 *Emacs* 编写了内置的 /tree-sitter(treesit)/ 支持，与之配套的便是 [[https://github.com/zerolee/tree-sitter-module][tree-sitter-module]] 这个脚本，但[[https://github.com/casouri/tree-sitter-module][原本的脚本]]支持的语言有限（只支持 7 个语言，现在应该远远不止了），所以就有了我这个脚本(此脚本在原作者的脚本之上构建而成)。
+
+
+* 脚本的使用方法<<使用方法>>
 ** 下载
    1. 将这个脚本完整的下载下来
-   2. 为 build-my.sh 加上执行权限:chmod +x build-my.sh
+   2. 为 *build-my.sh* 加上执行权限: ~chmod +x build-my.sh~
 
 ** build-my.sh 脚本的使用
    大致语法如下：
    1. 查看帮助
       
-      ./build-my.sh help 来查看该脚本的使用方法以及支持的语言
+      ~./build-my.sh help~ 来查看该脚本的使用方法以及支持的语言
       
    2. 构建所有支持的语言
       
-      ./build-my.sh 它会默认构建所有它支持的语言。
+      ~./build-my.sh~ 它会默认构建所有它支持的语言。
       
    3. 只构建一种支持的语言
       
-      ./build-my.sh language 对支持的语言进行构建
+      ~./build-my.sh language~ 对支持的语言进行构建
       
-      比如 ./build-my.sh c，那么他将会构建对 C 的支持
+      比如 ~./build-my.sh c~ ，那么他将会构建对 *C* 的支持
       
    4. 同时构建多种支持的语言
       
-      ./build-my.sh language1 language2 language3... 对 language1 language2 language3...进行构建
+      ~./build-my.sh language1 language2 language3...~ 对 /language1 language2 language3.../ 进行构建
       
-       例子： ./build-my.sh bash c cpp 会对 bash c cpp 进行构建
+       例子： ~./build-my.sh bash c cpp~ 会对 /bash c cpp/ 进行构建
        
-       注意：./build-my.sh 后面跟的语言必须是本脚本支持，可以通过 ./build-my.sh help 来查看该脚本支持的语言
+       注意： *./build-my.sh* 后面跟的语言必须是本脚本支持，可以通过 ~./build-my.sh help~ 来查看该脚本支持的语言
 
    5. 构建本脚本不支持，但符合一定规范的语言
       
-      ./build-my.sh language url 对不支持的语言，通过添加 url 来进行构建。
-      
-      例子：./bash-my.sh make https://github.com/alemuller/tree-sitter-make
-      
-      PS: 我这个脚本是有 make 的支持的，以上只是例子……
+      ~./build-my.sh language url~ 对不支持的语言，通过添加 /url/ 来进行构建。
 
+      *例子：* ~./build-my.sh make https://github.com/alemuller/tree-sitter-make~
+
+      *PS:* 我这个脚本是有 /make/ 的支持的，以上只是例子……
+
+** module 的安装
+   1. 编译成功后生成的文件位于 *dist* 目录下(/dist/ 目录与 /build-my.sh/ 文件在同一个目录下)。
+
+   2. 现在你需要让你的 *Emacs* 可以找到这些文件，你有以下几个方式可以做到这一点。
+      * 设置 ~treesit-extra-load-path~ 变量……即意味着你可以将这些文件放置在你喜欢的位置。
+
+      * 设置 ~LD_LIBRARY_PATH~ 这个环境变量
+
+      * 将文件放置在比如  ~/usr/lib/x86_64-linux-gnu~ 目录下
+
+选择一个你喜欢的方式即可。
+
+
+
+* 其他
+** 关系
+   [[https://github.com/tree-sitter/tree-sitter][tree-sitter]]: 语法解析库
+
+   [[https://github.com/zerolee/tree-sitter-module][tree-sitter-module]]: 使用语法解析库写成的对相应编程语言支持的库
+
+   [[https://github.com/emacs-mirror/emacs/blob/master/src/treesit.c][treesit.c]] [[https://github.com/emacs-mirror/emacs/blob/master/src/treesit.h][treesit.h]] [[https://github.com/emacs-mirror/emacs/blob/master/lisp/treesit.el][treesit.el]]: 使 /tree-sitter/ 支持 *Emacs* 的文件，由 *casouri* 及其他开发者共同开发……
+
+** tree-sitter 的安装与使用
+
+   1. 首先，你需要先安装 *tree-sitter* 这个库，可以使用操作系统自带的包管理器来安装，也可以手动安装：
+      #+begin_src bash-ts
+	git clone https://github.com/tree-sitter/tree-sitter.git --single-branch  --depth=1
+	cd tree-sitter
+	make
+	make install
+
+	# 注：我是 debian 11，默认将生成的库文件放在了/usr/local/lib 目录下，
+	# 如果你也跟我一样编译 Emacs的时候找不到 libtree-sitter.so 文件的话，可以尝试设置下LD_LIBRARY_PATH
+	# 或者直接在 /usr/lib/x86_64-linux-gnu 下建立两个软链接，链接到 libtree-sitter.so.0.0
+	# 或者直接复制过去就可以编译成功了，编译成功的话就不需要下面这步了。
+
+	sudo ln -s /usr/local/lib/libtree-sitter.so.0.0 libtree-sitter.so.0
+	sudo ln -s /usr/local/lib/libtree-sitter.so.0.0 libtree-sitter.so
+      #+end_src
+
+   2. 使用本脚本安装相应编程语言的支持，使用方法看[[使用方法][使用方法]]
+
+   3. 编译最新的 *Emacs* ，以便让 *Emacs* 完成对 /tree-sitter/ 的支持，最新的 *Emacs* 囊括了[[https://github.com/emacs-mirror/emacs/blob/master/src/treesit.c][treesit.c]] [[https://github.com/emacs-mirror/emacs/blob/master/src/treesit.h][treesit.h]] [[https://github.com/emacs-mirror/emacs/blob/master/lisp/treesit.el][treesit.el]].
+
+   4. 到了这一步你就可以使用 /tree-sitter/ 来解析了
+
+      查看 /tree-sitter/ 的使用文档：
+
+      打开 *Emacs* 然后输入：
+
+      ~C-h i m elisp RET g Parsing Program Source RET~
+
+      你可以自己使用这些 API 来编写自己喜欢的功能，也可以使用其他人利用 API 编写的工具。
+
+      
+
+   5. 有一些人通过使用这些 /api/ 为 *Emacs* 制作了一些 *major-mode* ，这些 *major-mode* 包含像语法高亮，缩进等等的支持
+      
+      大部分使用 /treesit/ 编写的 *major-mode* 已经包括在了 *Emacs* 当中……
+
+      目前大致支持 /python, js, json, c, c++, css, html, bash, java, ruby, yaml, typescript, tsx, rust, csharp, dockerfile, go, go-mod……/
+
+      但是，这 *major-mode* 默认并没有打开（即默认还是使用的 *Emacs* 原本的 *major-mode* ），你可以使用如下方式强制 *Emacs* 使用 /treesit/ 支持的 *major-mode* :
+      #+begin_src emacs-lisp :tangle yes
+	;;; 默认 major-mode 配置
+	(setq major-mode-remap-alist
+	      '((python-mode . python-ts-mode)
+		(js-json-mode . json-ts-mode)
+		(javascript-mode . js-ts-mode)
+		(css-mode . css-ts-mode)
+		(c++-mode . c++-ts-mode)
+		(c-mode . c-ts-mode)
+		(sh-mode . bash-ts-mode)
+		(csharp-mode . csharp-ts-mode)
+		(ruby-mode . ruby-ts-mode)
+		(java-mode . java-ts-mode)))
+
+	(setq auto-mode-alist
+	      (append '(("\\(?:CMakeLists\\.txt\\|\\.cmake\\)\\'" . cmake-ts-mode)
+			("\\.ya?ml\\'" . yaml-ts-mode)
+			("\\.ts\\'" . typescript-ts-mode)
+			("\\.tsx\\'" . tsx-ts-mode)
+			("\\.rs\\'" . rust-ts-mode))
+		      auto-mode-alist))
+      #+end_src
+
+      需要 *注意* 的一点，因为开发这些 /major-mode/ 是最近才添加进来的，所以在功能完备以及稳定性上未必比得过老版的 /major-mode/ ，所以，根据自己的需要去使用了……
